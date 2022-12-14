@@ -85,7 +85,8 @@ export interface ResolveDependenciesOptions {
   tag: string
   virtualStoreDir: string
   wantedLockfile: Lockfile
-  workspacePackages: WorkspacePackages
+  workspacePackages: WorkspacePackages,
+  metadataCacheReadonly:boolean
 }
 
 export async function resolveDependencyTree<T> (
@@ -151,6 +152,7 @@ export async function resolveDependencyTree<T> (
       },
       updateDepth: -1,
       prefix: importer.rootDir,
+      metadataCacheReadonly: opts.metadataCacheReadonly
     }
     return {
       updatePackageManifest: importer.updatePackageManifest,

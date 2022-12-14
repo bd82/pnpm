@@ -67,7 +67,8 @@ export interface ResolverFactoryOptions {
   offline?: boolean
   preferOffline?: boolean
   retry?: RetryTimeoutOptions
-  timeout?: number
+  timeout?: number,
+  metadataCacheReadonly?: boolean
 }
 
 export function createNpmResolver (
@@ -100,6 +101,7 @@ export function createNpmResolver (
       offline: opts.offline,
       preferOffline: opts.preferOffline,
       cacheDir: opts.cacheDir,
+      metadataCacheReadonly: opts.metadataCacheReadonly
     }),
   })
 }
@@ -113,7 +115,8 @@ export type ResolveFromNpmOptions = {
   lockfileDir?: string
   registry: string
   preferredVersions?: PreferredVersions
-  preferWorkspacePackages?: boolean
+  preferWorkspacePackages?: boolean,
+  metadataCacheReadonly?: boolean
 } & ({
   projectDir?: string
   workspacePackages?: undefined
@@ -158,6 +161,7 @@ async function resolveNpm (
       publishedBy: opts.publishedBy,
       authHeaderValue,
       dryRun: opts.dryRun === true,
+      metadataCacheReadonly: opts.metadataCacheReadonly === true,
       preferredVersionSelectors: opts.preferredVersions?.[spec.name],
       registry: opts.registry,
     })

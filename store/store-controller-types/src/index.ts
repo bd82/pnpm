@@ -108,6 +108,7 @@ export interface RequestPackageOptions {
   update?: boolean
   workspacePackages?: WorkspacePackages
   forceResolve?: boolean
+  metadataCacheReadonly: boolean
 }
 
 export type BundledManifestFunction = () => Promise<BundledManifest | undefined>

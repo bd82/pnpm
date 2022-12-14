@@ -79,6 +79,7 @@ export interface StrictInstallOptions {
   }
   sideEffectsCacheRead: boolean
   sideEffectsCacheWrite: boolean
+  metadataCacheReadonly: boolean
   strictPeerDependencies: boolean
   include: IncludedDependencies
   includeDirect: IncludedDependencies
@@ -181,6 +182,7 @@ const defaults = async (opts: InstallOptions) => {
     shellEmulator: false,
     sideEffectsCacheRead: false,
     sideEffectsCacheWrite: false,
+    metadataCacheReadonly: false,
     symlink: true,
     storeController: opts.storeController,
     storeDir: opts.storeDir,

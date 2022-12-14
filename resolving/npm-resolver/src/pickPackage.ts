@@ -52,7 +52,8 @@ export interface PickPackageOptions {
   preferredVersionSelectors: VersionSelectors | undefined
   pickLowestVersion?: boolean
   registry: string
-  dryRun: boolean
+  dryRun: boolean,
+  metadataCacheReadonly: boolean
 }
 
 function pickPackageFromMetaUsingTime (
@@ -155,7 +156,9 @@ export async function pickPackage (
     meta.cachedAt = Date.now()
     // only save meta to cache, when it is fresh
     ctx.metaCache.set(spec.name, meta)
-    if (!opts.dryRun) {
+    console.warn("condition!!!!")
+    if (!(opts.dryRun || opts.metadataCacheReadonly)) {
+      console.warn("TRUE!!!!!!!!")
       // eslint-disable-next-line @typescript-eslint/no-floating-promises
       limit(async () => {
         try {

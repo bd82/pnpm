@@ -70,7 +70,8 @@ export interface ResolveOptions {
   preferredVersions: PreferredVersions
   preferWorkspacePackages?: boolean
   registry: string
-  workspacePackages?: WorkspacePackages
+  workspacePackages?: WorkspacePackages,
+  metadataCacheReadonly: boolean
 }
 
 export type WantedDependency = {

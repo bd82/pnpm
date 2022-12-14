@@ -180,6 +180,7 @@ async function resolveAndFetch (
       projectDir: options.projectDir,
       registry: options.registry,
       workspacePackages: options.workspacePackages,
+      metadataCacheReadonly: options.metadataCacheReadonly
     }), { priority: options.downloadPriority })
 
     manifest = resolveResult.manifest

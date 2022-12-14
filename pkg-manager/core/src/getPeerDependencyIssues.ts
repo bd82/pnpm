@@ -81,6 +81,7 @@ export async function getPeerDependencyIssues (
       virtualStoreDir: ctx.virtualStoreDir,
       wantedLockfile: ctx.wantedLockfile,
       workspacePackages: opts.workspacePackages ?? {},
+      metadataCacheReadonly: false // flow of avoiding saving metadata cache is only relevant for "install" command
     }
   )
 

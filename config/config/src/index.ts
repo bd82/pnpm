@@ -103,6 +103,7 @@ export const types = Object.assign({
   'shell-emulator': Boolean,
   'side-effects-cache': Boolean,
   'side-effects-cache-readonly': Boolean,
+  'metadata-cache-readonly': Boolean,
   symlink: Boolean,
   sort: Boolean,
   'state-dir': String,

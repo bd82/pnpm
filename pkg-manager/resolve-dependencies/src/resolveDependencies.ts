@@ -250,7 +250,8 @@ interface ResolvedDependenciesOptions {
   pickLowestVersion?: boolean
   resolvedDependencies?: ResolvedDependencies
   updateDepth: number
-  prefix: string
+  prefix: string,
+  metadataCacheReadonly: boolean
 }
 
 interface PostponedResolutionOpts {
@@ -662,6 +663,7 @@ async function resolveDependenciesOfDependency (
     publishedBy: options.publishedBy,
     update,
     updateDepth,
+    metadataCacheReadonly: options.metadataCacheReadonly
   }
   const resolveDependencyResult = await resolveDependency(extendedWantedDep.wantedDependency, ctx, resolveDependencyOpts)
 
@@ -792,6 +794,8 @@ async function resolveChildren (
       publishedBy,
       resolvedDependencies,
       updateDepth,
+      // TODO: read from options?
+      metadataCacheReadonly: true
     }
   )
   ctx.childrenByParentDepPath[parentPkg.depPath] = pkgAddresses.map((child) => ({
@@ -990,7 +994,8 @@ interface ResolveDependencyOptions {
   publishedBy?: Date
   pickLowestVersion?: boolean
   update: boolean
-  updateDepth: number
+  updateDepth: number,
+  metadataCacheReadonly: boolean
 }
 
 type ResolveDependencyResult = PkgAddress | LinkedDependency | null
@@ -1062,6 +1067,7 @@ async function resolveDependency (
       skipFetch: false,
       update: options.update,
       workspacePackages: ctx.workspacePackages,
+      metadataCacheReadonly: options.metadataCacheReadonly
     })
   } catch (err: any) { // eslint-disable-line
     if (wantedDependency.optional) {

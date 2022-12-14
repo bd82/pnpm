@@ -55,6 +55,7 @@ export function rcOptionsTypes () {
     'shared-workspace-lockfile',
     'side-effects-cache-readonly',
     'side-effects-cache',
+    'metadata-cache-readonly',
     'store',
     'store-dir',
     'strict-peer-dependencies',
@@ -225,6 +226,10 @@ by any dependencies, so it is an emulation of a flat node_modules',
             description: 'Only use the side effects cache if present, do not create it for new packages',
             name: '--side-effects-cache-readonly',
           },
+          {
+            description: 'Only use the metadata cache if present, do not create or update it for new/updated packages',
+            name: '--metadata-cache-readonly',
+          },
           ...UNIVERSAL_OPTIONS,
         ],
       },
@@ -273,6 +278,7 @@ export type InstallCommandOptions = Pick<Config,
 | 'selectedProjectsGraph'
 | 'sideEffectsCache'
 | 'sideEffectsCacheReadonly'
+| 'metadataCacheReadonly'
 | 'sort'
 | 'sharedWorkspaceLockfile'
 | 'tag'

@@ -5,6 +5,11 @@
 		"minimatch": "^3.0.4",
 		"rimraf": "2.5.1"
 	},
+  "scripts": {
+    "clean" : "rm -rf node_modules pnpm-lock.yaml",
+    "pd-local-dist": "node ../../pnpm/bin/pnpm.cjs install --metadata-cache-readonly --prefer-offline",
+    "pd-local": "pd install --metadata-cache-readonly --prefer-offline"
+  },
 	"devDependencies": {
 		"is-positive": "1.0.0"
 	},

@@ -39,6 +39,7 @@ export type CreateNewStoreControllerOptions = CreateResolverOptions & Pick<Confi
 | 'strictSsl'
 | 'userAgent'
 | 'verifyStoreIntegrity'
+| 'metadataCacheReadonly'
 > & {
   ignoreFile?: (filename: string) => boolean
 } & Partial<Pick<Config, 'userConfig'>> & Pick<ClientOptions, 'resolveSymlinksInInjectedDirs'>
@@ -79,6 +80,7 @@ export async function createNewStoreController (
     ),
     gitShallowHosts: opts.gitShallowHosts,
     resolveSymlinksInInjectedDirs: opts.resolveSymlinksInInjectedDirs,
+    metadataCacheReadonly: opts.metadataCacheReadonly
   })
   await fs.mkdir(opts.storeDir, { recursive: true })
   return {

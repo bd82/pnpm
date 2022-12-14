@@ -12,6 +12,7 @@ import loadJsonFile from 'load-json-file'
 import nock from 'nock'
 import exists from 'path-exists'
 import tempy from 'tempy'
+import {ResolveFromNpmOptions} from "../src";
 
 const f = fixtures(__dirname)
 /* eslint-disable @typescript-eslint/no-explicit-any */
@@ -115,7 +116,7 @@ test('relative workspace protocol is skipped', async () => {
   expect(resolveResult).toBe(null)
 })
 
-test('dry run', async () => {
+async function defineMetaCacheNotCreatedTest(opts:Pick<ResolveFromNpmOptions, "dryRun" | "metadataCacheReadonly">):Promise<void> {
   nock(registry)
     .get('/is-positive')
     .reply(200, isPositiveMeta)
@@ -125,7 +126,7 @@ test('dry run', async () => {
     cacheDir,
   })
   const resolveResult = await resolve({ alias: 'is-positive', pref: '1.0.0' }, {
-    dryRun: true,
+    ...opts,
     registry,
   })
 
@@ -144,6 +145,15 @@ test('dry run', async () => {
   // so we must delay for a bit in order to read it
   await delay(500)
   expect(await exists(path.join(cacheDir, resolveResult!.id, '..', 'index.json'))).toBeFalsy()
+}
+
+
+test('dry run', async () => {
+  await defineMetaCacheNotCreatedTest({ dryRun: true });
+})
+
+test('metadata cache readonly', async () => {
+  await defineMetaCacheNotCreatedTest({ metadataCacheReadonly: true });
 })
 
 test('resolve to latest when no pref specified', async () => {

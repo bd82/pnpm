@@ -75,6 +75,7 @@ export interface Config {
   sideEffectsCacheReadonly?: boolean // for backward compatibility
   sideEffectsCacheRead?: boolean
   sideEffectsCacheWrite?: boolean
+  metadataCacheReadonly?:boolean
   shamefullyHoist?: boolean
   dev?: boolean
   ignoreCurrentPrefs?: boolean
